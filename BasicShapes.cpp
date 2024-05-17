@@ -132,3 +132,4 @@ void triangle::draw() const
 //	point newRefPoint = { RefPoint.x - topY, RefPoint.y - topX };
 //	top->setRefPoint(newRefPoint);
 //}
+// newcomment 
