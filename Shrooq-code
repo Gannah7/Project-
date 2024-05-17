@@ -1,1 +1,149 @@
+//feature 15 move ; BasicShapes.cpp
+void triangle::move_byarrows(int x, int y) {
+while (true) {
+		if (GetAsyncKeyState(VK_UP))
+		{ // Move up
+			RefPoint.y--;
+		}
+		else if (GetAsyncKeyState(VK_DOWN))
+		{ // Move down
+			RefPoint.y++;
+		}
+		else if (GetAsyncKeyState(VK_LEFT))
+		{ // Move left
+			RefPoint.x--;
+		}
+		else if (GetAsyncKeyState(VK_RIGHT))
+		{// Move right
+			RefPoint.x++;
+		}
+		else
+		{
+			break;
+		}
+	}
 
+void Rect::move_byarrows(int x , int y) {
+
+	while (true) {
+		if (GetAsyncKeyState(VK_UP)) 
+		{ // Move up
+			RefPoint.y--;
+		}
+		else if (GetAsyncKeyState(VK_DOWN))
+		{ // Move down
+			RefPoint.y++;
+		}
+		else if (GetAsyncKeyState(VK_LEFT)) 
+		{ // Move left
+			RefPoint.x--;
+		}
+		else if (GetAsyncKeyState(VK_RIGHT)) 
+		{// Move right
+			RefPoint.x++;
+		}
+		else
+		{
+			break;
+		}
+	}
+};
+
+void circle::move_byarrows(int x, int y) {
+
+	while (true) {
+		if (GetAsyncKeyState(VK_UP))
+		{ // Move up
+			RefPoint.y--;
+		}
+		else if (GetAsyncKeyState(VK_DOWN))
+		{ // Move down
+			RefPoint.y++;
+		}
+		else if (GetAsyncKeyState(VK_LEFT))
+		{ // Move left
+			RefPoint.x--;
+		}
+		else if (GetAsyncKeyState(VK_RIGHT))
+		{// Move right
+			RefPoint.x++;
+		}
+		else
+		{
+			break;
+		}
+	}
+};
+
+
+void grid::ActSave() {
+	ofstream outFile("game_save.txt");
+    if (outFile.is_open()) {
+        for (int i = 0; i < shapeCount; ++i) {
+            shapeList[i]->save(outFile);
+        }
+        outFile.close();
+    } 
+	else {
+        // Handle file open error
+    }
+
+}
+//shape.h
+virtual void save(ofstream& OutFile) const = 0;
+virtual void load(ifstream& InFile) const = 0;
+
+// BasicShapes.h & CompositeShapes.h for each shape
+void save(ofstream& OutFile) const override;
+
+// BasicShapes.cpp
+void Rect::save(std::ofstream& outFile) const {
+	outFile << "Rectangle " << wdth << " " << hght << " " << RefPoint.x << "" << RefPoint.y << endl;
+};
+
+void circle::save(std::ofstream& outFile) const {
+	outFile << "Circle " << rad << " " << RefPoint.x << "" << RefPoint.y << endl;
+};
+
+void triangle::save(std::ofstream& outFile) const {
+outFile << "Triangle " << length << " " << RefPoint.x << "" << RefPoint.y << endl;
+};
+
+
+//CompositeShapes.cpp
+
+void masterclown::save(ofstream& OutFile) const {
+	OutFile << "MASTERCLOWN " << RefPoint.x << " " << RefPoint.y << " "
+		<< fillColor << " " << borderColor << "" << top << "" << base << "" << basecircle << endl;
+};
+
+void pencil::save(ofstream& OutFile) const {
+	OutFile << "PENCIL " << RefPoint.x << " " << RefPoint.y << " "
+		<< fillColor << " " << borderColor << "" << top << "" << base << "" << baserectangle << endl;
+};
+
+void icecream::save(ofstream& OutFile) const {
+	OutFile << "ICECREAM " << RefPoint.x << " " << RefPoint.y << " "
+		<< fillColor << " " << borderColor << "" << top << "" << base << "" << basecircle << "" << toptriangle << endl;
+};
+
+void clown::save(ofstream& OutFile) const {
+	OutFile << "CLOWN " << RefPoint.x << " " << RefPoint.y << " "
+		<< fillColor << " " << borderColor << "" << top << "" << base << endl;
+};
+
+void loli::save(ofstream& OutFile) const {
+	OutFile << "LOLI " << RefPoint.x << " " << RefPoint.y << " "
+		<< fillColor << " " << borderColor << "" << top << "" << base << endl;
+};
+
+void Home::save(ofstream& OutFile) const {
+	OutFile << "HOME " << RefPoint.x << " " << RefPoint.y << " "
+		<< fillColor << " " << borderColor << "" << top << "" << base << "" << circle1 << "" << circle2 << endl;
+};
+
+
+void Sign::save(ofstream& OutFile) const {
+	OutFile << "SIGN " << RefPoint.x << " " << RefPoint.y << " "
+		<< fillColor << " " << borderColor << "" << top << "" << base << endl;
+};
